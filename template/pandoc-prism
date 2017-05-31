@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+
+from pandocfilters import toJSONFilter, CodeBlock
+
+HL = ['bash', 'c', 'clike', 'cpp', 'csharp', 'css', 'git', 'go', 'haskell',
+      'java', 'javascript', 'latex', 'markdown', 'markup', 'matlab', 'perl',
+      'php', 'powershell', 'python', 'r', 'ruby', 'rust', 'sql', 'txt']
+
+
+def codeBlock(key, value, format, meta):
+    if key != "CodeBlock":
+        return
+    [[id, cls, keyvals], rawCode] = value
+    cls = ['language-' + x if x in HL else x for x in cls]
+    cls = ['line-numbers' if x == 'numberLines' else x for x in cls]
+    return CodeBlock([id, cls, keyvals], rawCode)
+
+
+if __name__ == '__main__':
+    toJSONFilter(codeBlock)

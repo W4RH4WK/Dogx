@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+from mimetypes import guess_type
+from base64 import b64encode
+from pandocfilters import toJSONFilter, Link
+from subprocess import check_output
+
+
+def embed(key, value, format, meta):
+    if key != "Link":
+        return
+
+    [attr, text, [url, _]] = value
+
+    if not url.startswith("file://"):
+        return
+
+    mt = guess_type(url)[0] or ""
+
+    with open(url[7:], 'rb') as fdata:
+        data = b64encode(fdata.read()).decode()
+
+    url = "data:{};base64,{}".format(mt, data)
+
+    return Link(attr, text, [url, ''])
+
+
+if __name__ == '__main__':
+    toJSONFilter(embed)

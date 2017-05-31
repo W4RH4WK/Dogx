@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+
+import os
+
+from base64 import b64encode
+from pandocfilters import toJSONFilter, Image, RawBlock, RawInline
+from subprocess import check_output
+
+TPL_DIR = os.path.dirname(os.path.realpath(__file__))
+TP_DIR = os.path.realpath(os.path.join(TPL_DIR, '..', 'third_party'))
+
+
+def tex2svg(content, template=None):
+    cmd = [os.path.join(TP_DIR, 'tex2svg', 'tex2svg')]
+
+    if template:
+           cmd.append(os.path.join(TPL_DIR, template))
+
+    svg = check_output(cmd, input=content.encode())
+    svg = b64encode(svg).decode()
+    return 'data:image/svg+xml;base64,{}'.format(svg)
+
+
+def latex(key, value, format, meta):
+    # handle raw latex
+    if key == 'RawBlock' and value[0] == 'latex':
+        svg = tex2svg(value[1], 'latex.tex')
+        svg = '<p><img src="{}" class="latex-DisplayMath" /></p>'.format(svg)
+        return RawBlock('html', svg)
+
+    # handle possible tikz picture
+    if key == 'Image':
+        attr, caption, src = value[0], value[1], value[2][0]
+
+        if not os.path.exists(src) or os.path.splitext(src)[1] != '.tikz':
+            return
+
+        attr[1].append('latex-tikz')
+
+        with open(src, 'r') as ftikz:
+            svg = tex2svg(ftikz.read(), 'tikz.tex')
+
+        return Image(attr, caption, [svg, 'fig:'])
+
+
+if __name__ == '__main__':
+    toJSONFilter(latex)

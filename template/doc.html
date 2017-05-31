@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+$for(author-meta)$
+		<meta name="author" content="$author-meta$">
+$endfor$
+$if(date-meta)$
+		<meta name="dcterms.date" content="$date-meta$">
+$endif$
+
+		<title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+
+		<!-- prism.js -->
+		<link rel="stylesheet" href="$TP_DIR$/prism.js/prism.css">
+
+		<!-- KaTex -->
+		<link rel="stylesheet" href="$TP_DIR$/katex/katex.min.css">
+
+		<style>
+			body {
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 12pt;
+				line-height: 1.43;
+			}
+
+			p {
+				margin: 0em 0em 1.5em 0em;
+				padding: 0em;
+				text-align: justify;
+				-webkit-hyphens: auto;
+				-ms-hyphens: auto;
+				hyphens: auto;
+			}
+
+			h1, h2, h3, h4, h5, h6 {
+				font-weight: 300;
+				line-height: 1.1;
+				padding: 0em;
+				margin: 2em 0em 1em;
+				font-weight: bold
+			}
+
+			h1 {
+				font-size: 24.88pt;
+				margin-top: 0em;
+			}
+
+			h2 {
+				font-size: 24.88pt;
+			}
+
+			h3 {
+				font-size: 20.74pt;
+			}
+
+			h4 {
+				font-size: 17.28pt;
+			}
+
+			h5 {
+				font-size: 14.4pt;
+			}
+
+			h6 {
+				font-size: 12pt;
+			}
+
+			figure {
+				text-align: center;
+				margin: 20px;
+			}
+
+			figure img {
+				margin-bottom: 10px;
+			}
+
+			table {
+				margin: 10px auto;
+				border: solid thin #d4d4d4;
+				border-spacing: 0px;
+				border-collapse: collapse;
+			}
+
+			table th,
+			table td {
+				border: solid thin #d4d4d4;
+				padding: 2px 20px;
+			}
+
+			blockquote {
+				border-left: 5px solid #d4d4d4;
+				margin: 10px;
+				padding: 1px 15px;
+				page-break-inside: avoid;
+			}
+
+			pre:not([class*="language-"]) {
+				display: block;
+				font-size: 10pt;
+				margin: 10px 0px;
+				padding: 10px;
+				color: #333;
+				word-break: break-all;
+				word-wrap: break-word;
+				background: #f5f5f5;
+				border: solid thin #d4d4d4;
+			}
+
+			pre:not([class*="language-"]) code {
+				color: inherit;
+				font-size: inherit;
+				margin: 0px;
+				padding: 0px;
+				white-space: pre-wrap;
+			}
+
+			code {
+				padding: 2px 4px;
+				font-family: Consolas, Monaco, 'Andale Mono', monospace;
+				font-size: 90%;
+				background: #f5f5f5;
+			}
+
+			.footnote {
+				margin: 0px 0px 0px 6px;
+				font-size: 10pt;
+			}
+
+			p .footnote:first-of-type {
+				margin-top: 6px;
+			}
+
+			.footnote-num {
+				margin-right: 4px;
+			}
+
+			.title, .subtitle, .authors, .date {
+				text-align: center;
+				padding: 0em;
+				margin: 0em;
+			}
+
+			.title {
+				font-size: 24.88pt;
+			}
+
+			.subtitle {
+				font-size: 17.28pt;
+			}
+
+			.subtitle:empty {
+				display: none;
+			}
+
+			.authors, .date {
+				font-size: 12pt;
+				margin: 1em 0em;
+			}
+
+			.authors li {
+				list-style-type: none;
+				display: inline;
+				margin: 0em 2em;
+			}
+
+			nav ul {
+				margin: 0px 0px 0px 15px;
+				padding: 0px
+			}
+
+			nav li {
+				list-style: none;
+				line-height: 1.7;
+			}
+
+			nav > ul > li {
+				margin: 0px 0px 15px 0px;
+			}
+
+			.toc-section-number,
+			.header-section-number {
+				padding-right: 10px;
+			}
+
+			/* override prism max-height */
+			pre[class*="language-"],
+			pre[class*="language-"] > code[data-language] {
+				max-height: none;
+			}
+
+			/* LaTeX stuff */
+			.math.display {
+				display: block;
+				text-align: center;
+			}
+
+			img.latex-DisplayMath {
+				display: block;
+				margin: auto;
+			}
+		</style>
+
+		<style media="screen">
+			body {
+				color: #333;
+			}
+
+			hr {
+				border: none;
+				border-top: solid 1.5px #d4d4d4;
+			}
+
+			a {
+				color: #428bca;
+				text-decoration: none;
+			}
+
+			a:hover {
+				color: #2a6496;
+				text-decoration: underline;
+			}
+
+			.doc {
+				width: 800px;
+				margin: 10px auto;
+			}
+
+			header, nav, section.level1 {
+				background-color: #fdfdfd;
+				border: solid thin #d4d4d4;
+				margin-bottom: 20px;
+				padding: 1em;
+			}
+
+			nav {
+				columns: 2;
+			}
+		</style>
+
+		<style media="print">
+			header, nav {
+				display: none;
+			}
+
+			hr {
+				border: none;
+				border-top: solid thin black;
+			}
+
+			a {
+				color: #000;
+				text-decoration: none;
+			}
+
+			p {
+				page-break-inside: avoid;
+			}
+
+			h1 {
+				page-break-before: always;
+			}
+
+			/* fix shadow glitch in wkhtmltopdf */
+			pre[class*="language-"]:before,
+			pre[class*="language-"]:after {
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="doc">
+
+$if(title)$
+			<header>
+				<div class="title">$title$</div>
+				<div class="subtitle">$subtitle$</div>
+				<ul class="authors">
+$for(author)$
+					<li>$author$</li>
+$endfor$
+				</ul>
+				<div class="date">$date$</div>
+			</header>
+$endif$
+
+$if(toc)$
+			<nav>$toc$</nav>
+$endif$
+
+			<main>$body$</main>
+
+		</div>
+
+		<!-- Put footnotes right under the paragraph containing their referece. -->
+		<script>
+			function containingParagraph(elem) {
+				while (true) {
+					if (elem.tagName == 'P') {
+						return elem;
+					}
+					elem = elem.parentNode;
+				}
+			}
+
+			function moveFootnotes() {
+				var notes = document.getElementsByClassName('footnotes')
+				if (notes.length == 0) {
+					return;
+				}
+				notes = notes[0].children[1].children;
+
+				for (var i = 1; i < notes.length + 1; i++) {
+					var note = document.getElementById('fn' + i).children[0];
+					var noteRef = document.getElementById('fnref' + i);
+
+					note.setAttribute('class', 'footnote');
+
+					// prepend	footnote number to footnote
+					var noteNum = document.createElement('SPAN');
+					noteNum.setAttribute('class', 'footnote-num');
+					var noteNumText = document.createElement('SUP');
+					noteNumText.textContent = i;
+					noteNum.appendChild(noteNumText);
+					note.insertBefore(noteNum, note.firstChild);
+
+					// append footnote to paragraph containing reference
+					containingParagraph(noteRef).appendChild(note);
+
+					// remove backwards link
+					note.removeChild(note.lastChild);
+
+					// remove link from footnote reference
+					noteRef.parentNode.replaceChild(noteRef.children[0], noteRef);
+				}
+
+				var notes = document.getElementsByClassName('footnotes')[0];
+				notes.parentNode.removeChild(notes);
+			}
+			moveFootnotes();
+		</script>
+
+		<!-- Highlight.js -->
+		<script src="$TP_DIR$/prism.js/prism.js"></script>
+
+		<!-- KaTeX -->
+		<script src="$TP_DIR$/katex/katex.min.js"></script>
+		<script>
+			var mathElements = document.getElementsByClassName("math");
+			for (var i = 0; i < mathElements.length; i++) {
+				var texText = mathElements[i].firstChild;
+				katex.render(texText.data, mathElements[i]);
+			}
+		</script>
+	</body>
+</html>

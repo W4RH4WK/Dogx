@@ -1,0 +1,30 @@
+\tikzstyle{ptr} = [-{Latex[length=2.7mm]}]%
+
+\tikzstyle{block} = [
+    draw,
+    align=center,
+    rectangle,
+    minimum height=0.8cm,
+    minimum width=1.6cm
+]%
+
+\begin{tikzpicture}
+
+    \node[block] (1) {\ttfamily int y = x};
+    \node[block] (2) [below       = of 1] {\ttfamily int z = 1};
+    \node[block] (3) [below       = of 2] {\ttfamily y > 1};
+    \node[block] (4) [below left  = of 3] {\ttfamily z = z * y};
+    \node[block] (5) [above       = of 4] {\ttfamily y = y - 1};
+    \node[block] (6) [below right = of 3] {\ttfamily y = 0};
+
+    \path[ptr] (1) edge (2)
+               (2) edge (3)
+               (3) edge node[left = 4pt]  {T} (4)
+               (3) edge node[right = 4pt] {F} (6)
+               (4) edge (5)
+               (5) edge (3);
+
+    \foreach \x in {1,...,6}
+        \node at ($(\x.north west)-(0.25,0)$) {\x};
+
+\end{tikzpicture}

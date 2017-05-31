@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+$for(author-meta)$
+		<meta name="author" content="$author-meta$">
+$endfor$
+$if(date-meta)$
+		<meta name="dcterms.date" content="$date-meta$">
+$endif$
+
+		<title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+
+		<style>
+			body {
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 20px;
+				line-height: 1.43;
+			}
+
+			.title, .subtitle, .authors, .date {
+				text-align: center;
+				padding: 2px;
+				margin: 0px;
+			}
+
+			.title {
+				font-size: 36px;
+				padding-top: 6em;
+			}
+
+			.subtitle {
+				padding-top: 1em;
+				font-size: 28px;
+			}
+
+			.subtitle:empty {
+				display: none;
+			}
+
+			.authors, .date {
+				padding-top: 4em;
+			}
+
+			.authors li {
+				list-style-type: none;
+				display: inline;
+				margin: 0em 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="title">$title$</div>
+		<div class="subtitle">$subtitle$</div>
+		<ul class="authors">
+$for(author)$
+			<li>$author$</li>
+			<li>$author$</li>
+			<li>$author$</li>
+$endfor$
+		</ul>
+		<div class="date">$date$</div>
+	</body>
+</html>
+
