@@ -6,6 +6,10 @@ PAN              = pandoc
 PANFLAGS         = --smart \
                    --katex \
                    --no-highlight \
+                   --filter pandoc-fignos \
+                   -M fignos-cleveref=On \
+                   -M fignos-plus-name=Figure \
+                   -M fignos-star-name=Figure \
                    --filter $(TPL_DIR)/pandoc-embed \
                    --filter $(TPL_DIR)/pandoc-exec \
                    --filter $(TPL_DIR)/pandoc-latex \
@@ -40,15 +44,15 @@ HTMLTOPDF_DOC    = -T 25mm -B 25mm -L 25mm -R 25mm \
 HTMLTOPDF_SLIDES = --orientation Landscape
 
 %.html: %.md
-	$(PAN) $(PANFLAGS) $(PANFLAGS_DOC) -o $@ $<
+	$(PAN) $(PANFLAGS) $(PANFLAGS_DOC) -o $@ $^
 
 %.pdf: %.html
-	$(PAN) --smart --to html5 --template $(TPL_DIR)/doc_cover.html $< | \
+	$(PAN) --smart --to html5 --template $(TPL_DIR)/doc_cover.html $(<:.html=.md) | \
 	$(HTMLTOPDF) $(HTMLTOPDFFLAGS) $(HTMLTOPDF_DOC) cover - toc --xsl-style-sheet $(TPL_DIR)/doc_toc.xsl "file://$(WD)/$<?print-pdf" $@
 
 
 %_slides.html: %_slides.md
-	$(PAN) $(PANFLAGS) $(PANFLAGS_SLIDES) -o $@ $<
+	$(PAN) $(PANFLAGS) $(PANFLAGS_SLIDES) -o $@ $^
 
 %_slides.pdf: %_slides.html
 	$(HTMLTOPDF) $(HTMLTOPDFFLAGS) $(HTMLTOPDF_SLIDES) "file://$(WD)/$<?print-pdf" $@

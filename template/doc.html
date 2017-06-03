@@ -185,6 +185,10 @@ $endif$
 				padding-right: 10px;
 			}
 
+			.references p {
+				text-align: left;
+			}
+
 			/* override prism max-height */
 			pre[class*="language-"],
 			pre[class*="language-"] > code[data-language] {
@@ -192,7 +196,12 @@ $endif$
 			}
 
 			/* LaTeX stuff */
+			.math {
+				font-size: 10pt;
+			}
+
 			.math.display {
+				margin: 1em 0em;
 				display: block;
 				text-align: center;
 			}
@@ -261,6 +270,10 @@ $endif$
 
 			h1 {
 				page-break-before: always;
+			}
+
+			h2, h3, h4, h5, h6 {
+				page-break-inside: avoid;
 			}
 
 			/* fix shadow glitch in wkhtmltopdf */
