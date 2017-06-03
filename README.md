@@ -1,1 +1,1 @@
-# Dogx (draft)
+# Documentation Generator X (draft)
