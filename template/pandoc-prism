@@ -10,9 +10,11 @@ HL = ['bash', 'c', 'clike', 'cpp', 'csharp', 'css', 'git', 'go', 'haskell',
 def codeBlock(key, value, format, meta):
     if key != "CodeBlock":
         return
+
     [[id, cls, keyvals], rawCode] = value
     cls = ['language-' + x if x in HL else x for x in cls]
     cls = ['line-numbers' if x == 'numberLines' else x for x in cls]
+
     return CodeBlock([id, cls, keyvals], rawCode)
 
 
