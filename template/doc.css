@@ -30,7 +30,7 @@ blockquote {
 
 /* Code */
 pre {
-  font-size: 10pt;
+	font-size: 10pt;
 	background: #f5f5f5;
 	border: solid thin #d4d4d4;
 	padding: 0.5em;
@@ -112,14 +112,17 @@ p .footnote:first-of-type {
 }
 
 /* Custom Stuff */
-ul.files {
-	list-style: none;
+
+.file {
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-size: 10pt;
 }
 
-ul.files li:before {
+.file:before {
 	font-family: FontAwesome;
 	content: "\f15b";
 	display: inline-block;
+	padding-right: 0.5em;
 }
 
 /* ------------------------------------------------------------ Screen Style */

@@ -4,6 +4,7 @@ TP_DIR  = $(realpath $(TPL_DIR)/../third_party)
 PAN              = pandoc
 
 PANFLAGS         = --smart \
+                   --self-contained \
                    --katex \
                    --no-highlight \
                    --filter pandoc-fignos \
