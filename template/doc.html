@@ -61,8 +61,13 @@ $endif$
 			}
 		</style>
 
-		<!-- Style -->
+		<!-- Base Style -->
 		<link rel="stylesheet" href="$TPL_DIR$/doc.css">
+
+		<!-- Custom Style -->
+$for(css)$
+		<link rel="stylesheet" href="$css$">
+$endfor$
 	</head>
 
 	<body>
