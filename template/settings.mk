@@ -3,8 +3,8 @@ TP_DIR  = $(realpath $(TPL_DIR)/../third_party)
 
 PAN              = pandoc
 
+                   # --self-contained
 PANFLAGS         = --smart \
-                   --self-contained \
                    --katex \
                    --no-highlight \
                    --filter pandoc-fignos \
@@ -30,6 +30,7 @@ PANFLAGS_DOC     = --to html5 \
                    --template $(TPL_DIR)/doc.html
 
 PANFLAGS_SLIDES  = --to revealjs \
+                   --toc \
                    --slide-level 2 \
                    --template $(TPL_DIR)/slides.html
 
