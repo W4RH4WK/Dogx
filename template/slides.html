@@ -28,6 +28,10 @@ $endif$
 		<link rel="stylesheet" href="$TP_DIR$/katex/katex.min.css">
 
 		<style>
+			.reveal {
+				font-size: 32px;
+			}
+
 			.reveal .slide-number {
 				bottom: 26px;
 				right: 16px;
@@ -89,8 +93,9 @@ $body$
 		<script src="$TP_DIR$/reveal.js/js/reveal.js"></script>
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: false,
+			var cfg = {
+				controls: true,
+				controlsLayout: 'edges',
 				slideNumber: 'h.v',
 				transition: 'slide',
 				zoomKey: 'ctrl',
@@ -102,10 +107,12 @@ $body$
 					{ src: '$TP_DIR$/reveal.js/plugin/print-pdf/print-pdf.js', async: true},
 					{ src: '$TP_DIR$/reveal.js/plugin/zoom-js/zoom.js', async: true}
 				]
-			});
+			};
+
+			Reveal.initialize(cfg);
 		</script>
 
-		<!-- PDF exports -->
+		<!-- PDF export -->
 		<script>
 			if (window.location.search.match(/print-pdf/gi)) {
 				var link = document.createElement('link');
@@ -115,6 +122,7 @@ $body$
 				document.getElementsByTagName('head')[0].appendChild(link);
 			}
 		</script>
+
 
 		<!-- Highlight.js -->
 		<script src="$TP_DIR$/highlight.js/highlight.pack.js"></script>
