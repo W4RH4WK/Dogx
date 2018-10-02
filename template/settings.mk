@@ -3,9 +3,7 @@ TP_DIR  = $(realpath $(TPL_DIR)/../third_party)
 
 PAN              = pandoc
 
-                   # --self-contained
-PANFLAGS         = --smart \
-                   --katex \
+PANFLAGS         = --katex \
                    --no-highlight \
                    --filter pandoc-fignos \
                    -M fignos-cleveref=On \
@@ -49,9 +47,8 @@ HTMLTOPDF_SLIDES = --orientation Landscape
 	$(PAN) $(PANFLAGS) $(PANFLAGS_DOC) -o $@ $^
 
 %.pdf: %.html
-	$(PAN) --smart --to html5 --template $(TPL_DIR)/doc_cover.html $(<:.html=.md) | \
+	$(PAN) --to html5 --template $(TPL_DIR)/doc_cover.html $(<:.html=.md) | \
 	$(HTMLTOPDF) $(HTMLTOPDFFLAGS) $(HTMLTOPDF_DOC) cover - toc --xsl-style-sheet $(TPL_DIR)/doc_toc.xsl "file://$(WD)/$<?print-pdf" $@
-
 
 %_slides.html: %_slides.md
 	$(PAN) $(PANFLAGS) $(PANFLAGS_SLIDES) -o $@ $^
