@@ -33,26 +33,17 @@ PANFLAGS_SLIDES  = --to revealjs \
                    --slide-level 2 \
                    --template $(TPL_DIR)/slides.html
 
-HTMLTOPDF        = wkhtmltopdf
+HTMLTOPDF        = chromium
 
-HTMLTOPDFFLAGS   = --page-size A4 \
-                   --javascript-delay 500
-
-HTMLTOPDF_DOC    = -T 25mm -B 25mm -L 25mm -R 25mm \
-                   --print-media-type \
-                   --footer-center "[page]"
-
-HTMLTOPDF_SLIDES = --orientation Landscape
+HTMLTOPDFFLAGS   = --headless \
+                   --disable-gpu \
+                   --virtual-time-budget=1000
 
 %.html: %.md
 	$(PAN) $(PANFLAGS) $(PANFLAGS_DOC) -o $@ $^
 
 %.pdf: %.html
-	$(PAN) --to html5 --template $(TPL_DIR)/doc_cover.html $(<:.html=.md) | \
-	$(HTMLTOPDF) $(HTMLTOPDFFLAGS) $(HTMLTOPDF_DOC) cover - toc --xsl-style-sheet $(TPL_DIR)/doc_toc.xsl "file://$(WD)/$<?print-pdf" $@
+	$(HTMLTOPDF) $(HTMLTOPDFFLAGS) --print-to-pdf=$@ "file://$(WD)/$<?print-pdf"
 
 %_slides.html: %_slides.md
 	$(PAN) $(PANFLAGS) $(PANFLAGS_SLIDES) -o $@ $^
-
-%_slides.pdf: %_slides.html
-	$(HTMLTOPDF) $(HTMLTOPDFFLAGS) $(HTMLTOPDF_SLIDES) "file://$(WD)/$<?print-pdf" $@

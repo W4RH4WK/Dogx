@@ -235,6 +235,11 @@ p .footnote:first-of-type {
 
 /* ------------------------------------------------------------- Print Style */
 @media print {
+	@page {
+		size: A4;
+		margin: 25mm;
+	}
+
 	header, nav {
 		display: none;
 	}
