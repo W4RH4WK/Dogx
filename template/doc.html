@@ -182,8 +182,9 @@ $endif$
 		<script>
 			var mathElements = document.getElementsByClassName("math");
 			for (var i = 0; i < mathElements.length; i++) {
-				var texText = mathElements[i].firstChild;
-				katex.render(texText.data, mathElements[i]);
+				// remove \( and \)
+				var tex = mathElements[i].firstChild.data.slice(2, -2);
+				katex.render(tex, mathElements[i]);
 			}
 		</script>
 	</body>

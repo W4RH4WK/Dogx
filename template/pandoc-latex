@@ -22,11 +22,18 @@ def tex2svg(content, template=None):
 
 
 def latex(key, value, format, meta):
-    # handle raw latex
-    if key == 'RawBlock' and value[0] == 'latex':
-        svg = tex2svg(value[1], 'latex.tex')
+    def asSvg(content):
+        svg = tex2svg(content, 'latex.tex')
         svg = '<p><img src="{}" class="latex-DisplayMath" /></p>'.format(svg)
         return RawBlock('html', svg)
+
+    # handle display math
+    if key == 'Para' and value[0]['t'] == 'Math' and value[0]['c'][0]['t'] == 'DisplayMath':
+        return asSvg("$${}$$".format(value[0]['c'][1]))
+
+    # handle raw inline tex
+    if key == 'Para' and value[0]['t'] == 'RawInline' and value[0]['c'][0] == 'tex':
+        return asSvg(value[-1]['c'][1])
 
     # handle possible tikz picture
     if key == 'Image':
