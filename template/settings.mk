@@ -3,7 +3,8 @@ TP_DIR  = $(realpath $(TPL_DIR)/../third_party)
 
 PAN              = pandoc
 
-PANFLAGS         = --katex \
+PANFLAGS         = --self-contained \
+                   --katex \
                    --no-highlight \
                    --filter pandoc-fignos \
                    -M fignos-cleveref=On \
