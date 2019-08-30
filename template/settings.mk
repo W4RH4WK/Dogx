@@ -33,11 +33,13 @@ PANFLAGS_SLIDES  = --to revealjs \
                    --slide-level 2 \
                    --template $(TPL_DIR)/slides.html
 
-HTMLTOPDF        = chromium
+HTMLTOPDF        = chromium-browser
 
 HTMLTOPDFFLAGS   = --headless \
                    --disable-gpu \
-                   --virtual-time-budget=1000
+                   --virtual-time-budget=1000 \
+                   --no-sandbox \
+                   --disable-features=VizDisplayCompositor
 
 %.html: %.md
 	$(PAN) $(PANFLAGS) $(PANFLAGS_DOC) -o $@ $^
