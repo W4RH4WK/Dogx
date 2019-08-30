@@ -108,21 +108,21 @@ int main(int argc, char *argv[]) {
 
 # Lists
 
-## Bulelts
+## Bullets
 
 - List element 1
 - List element 2
-    - List element 2.1
-    - List element 2.2
+  - List element 2.1
+  - List element 2.2
 - List element 2
 
 ## Enumeration
 
 1. List element
 2. another list element
-    1. list subelement 1
-    2. list subelement 2
-2. yet another list element
+   1. list subelement 1
+   2. list subelement 2
+3. yet another list element
 
 ## Description
 
