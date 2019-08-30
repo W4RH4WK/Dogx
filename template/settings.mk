@@ -30,6 +30,7 @@ PANFLAGS_DOC     = --to html5 \
 
 PANFLAGS_SLIDES  = --to revealjs \
                    --toc \
+                   --toc-depth 1 \
                    --slide-level 2 \
                    --template $(TPL_DIR)/slides.html
 
