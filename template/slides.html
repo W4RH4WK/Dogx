@@ -125,7 +125,10 @@ $body$
 
 		<!-- Highlight.js -->
 		<script src="$TP_DIR$/highlight.js/highlight.pack.js"></script>
-		<script>hljs.initHighlightingOnLoad();</script>
+		<script>
+			hljs.configure({ languages: [] });
+			hljs.initHighlightingOnLoad();
+		</script>
 
 		<!-- KaTeX -->
 		<script src="$TP_DIR$/katex/katex.min.js"></script>
