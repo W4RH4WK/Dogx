@@ -7,7 +7,7 @@ PANFLAGS         = --self-contained \
                    --katex \
                    --no-highlight \
                    --filter pandoc-fignos \
-                   -M fignos-cleveref=On \
+                   -M fignos-cleveref=True \
                    -M fignos-plus-name=Figure \
                    -M fignos-star-name=Figure \
                    --filter $(TPL_DIR)/pandoc-embed \
